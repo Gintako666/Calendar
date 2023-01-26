@@ -1,27 +1,33 @@
-import React from 'react';
-import './App.scss';
+/* eslint-disable no-console */
+import React, { useEffect } from 'react';
+import './styles/App.scss';
+import Calendar from './components/Calendar/Calendar';
+import Header from './components/Header/Header';
+import NewIdeaItem from './components/NewIdeaItem/NewIdeaItem';
+import { useLocalStorage } from './hooks/use-localStorage';
+import { useAppSelector } from './hooks/reduxHooks';
+// import { actions as todosActions } from './features/todos';
 
-interface Props {
-  onClick: () => void;
-}
+const App: React.FC = () => {
+  // const dispatch = useAppDispatch();
+  const { todos } = useAppSelector(state => state.todos);
+  const { isOpen } = useAppSelector(state => state.addTodo);
+  const [, setTodos] = useLocalStorage('todos', []);
 
-export const Provider: React.FC<Props> = React.memo(
-  ({ onClick, children }) => (
-    <button
-      type="button"
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  ),
-);
+  useEffect(() => {
+    console.log('set');
+    setTodos(todos);
+  }, [todos]);
 
-export const App: React.FC = () => {
   return (
-    <div className="starter">
-      <Provider onClick={() => ({})}>
-        <TodoList />
-      </Provider>
+    <div className="App">
+      <div className="container">
+        <Header />
+        <Calendar />
+        {isOpen && <NewIdeaItem />}
+      </div>
     </div>
   );
 };
+
+export default App;

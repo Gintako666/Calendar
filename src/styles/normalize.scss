@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.App {
+  width: 100%;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+body {
+  margin: 0;
+}
+
+input, textarea, button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: white;
+  @include flexCenter;
+}
