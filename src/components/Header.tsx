@@ -8,6 +8,7 @@ import { getYears } from '../utils/calendar';
 const Header: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const { month, year } = useAppSelector(state => state.calendar);
+  const { isOpen } = useAppSelector(state => state.eventTodo);
   const [openSelects, setOpesSelects] = useState(false);
 
   return (
@@ -16,7 +17,7 @@ const Header: React.FunctionComponent = () => {
         type="button"
         className="header__button header__button--add-todo"
         onClick={() => {
-          dispatch(eventTodoActions.setOpenForm(true));
+          dispatch(eventTodoActions.setOpenForm(!isOpen));
         }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -56,7 +57,7 @@ const Header: React.FunctionComponent = () => {
           dispatch(calendarActions.setYear(new Date().getFullYear()));
         }}
       >
-        Сьогодні
+        Today
       </button>
       <div className="header__selects-wrapper">
         <button
