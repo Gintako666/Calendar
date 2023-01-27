@@ -99,7 +99,7 @@ const NewIdeaItem: React.FunctionComponent = () => {
           disabled={disabledButton}
           type="button"
           onClick={() => {
-            const refreshDate = `${new Date().toLocaleDateString('en-US')} ${new Date().toTimeString().slice(0, 8)}`;
+            const refreshDate = `${new Date().toLocaleDateString('en-GB')} ${new Date().toTimeString().slice(0, 8)}`;
 
             const newTodo = {
 
@@ -109,6 +109,9 @@ const NewIdeaItem: React.FunctionComponent = () => {
               time,
               refreshDate,
             };
+
+            console.log(date);
+            // 2023-01-23
 
             if (activeTodo) {
               dispatch(todosActions.editTodo({

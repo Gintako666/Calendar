@@ -27,7 +27,8 @@ const Calendar: React.FunctionComponent = () => {
 
   const handleDayClick = (dateSelect: Date | null) => {
     if (dateSelect) {
-      dispatch(addTodoActions.setSelectDate(dateSelect.toLocaleDateString().split('.').reverse().join('-')));
+      console.log(dateSelect.toLocaleDateString('en-GB').split('/').reverse().join('-'));
+      dispatch(addTodoActions.setSelectDate(dateSelect.toLocaleDateString('en-GB').split('/').reverse().join('-')));
     } else {
       dispatch(addTodoActions.setSelectDate(dateSelect));
     }
@@ -44,7 +45,7 @@ const Calendar: React.FunctionComponent = () => {
               const keyDate = (indexDate * Math.random());
 
               const todosInThisDay = todos.filter(item => (
-                item.date === dateDisplay?.toLocaleDateString().split('.').reverse().join('-')
+                item.date === dateDisplay?.toLocaleDateString('en-GB').split('/').reverse().join('-')
               )).sort((a: Todo, b: Todo) => a.time.localeCompare(b.time));
 
               if (dateDisplay) {
@@ -55,10 +56,11 @@ const Calendar: React.FunctionComponent = () => {
                     className={classNames(
                       'calendar__item',
                       { 'calendar__item--disabled': dateDisplay.getMonth() !== month },
-                      { 'calendar__item--active': dateDisplay.toLocaleDateString().split('.').reverse().join('-') === selectDate },
+                      { 'calendar__item--active': dateDisplay.toLocaleDateString('en-GB').split('/').reverse().join('-') === selectDate },
                     )}
                     aria-hidden
                     onClick={() => {
+                      console.log(dateDisplay);
                       if (dateDisplay.getMonth() !== month) {
                         dispatch(calendatActions.setMonth(dateDisplay.getMonth()));
                         dispatch(calendatActions.setYear(dateDisplay.getFullYear()));
