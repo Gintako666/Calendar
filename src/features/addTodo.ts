@@ -27,8 +27,8 @@ const addTodoSlice = createSlice({
     deleteSelectTodo: (value) => {
       value.activeTodo = null;
     },
-    setOpenForm: (value) => {
-      value.isOpen = !value.isOpen;
+    setOpenForm: (value, action: PayloadAction<boolean>) => {
+      value.isOpen = action.payload;
     },
   },
 });

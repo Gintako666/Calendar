@@ -1,8 +1,7 @@
 .calendar {
+  flex-grow: 2;
   display: grid;
-  // height: 100vh;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(5, 1fr);
 
   &__week {
     display: grid;
@@ -11,38 +10,37 @@
   }
 
   &__item {
-    padding: 6px 0;
-    display: inline-flex;
+    padding: 6px;
+    display: inline-grid;
+    grid-template-rows: 32px;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    // justify-content: space-between;
-    // display: inline-grid;
-    // grid-template-columns: repeat(2, 1fr);
-    // grid-template-rows: repeat(2, 1fr);
+    // flex-direction: column;
+    overflow: hidden;
 
     width: 100%;
-    min-width: 100px;
-    height: 150px;
     border: 2px solid black;
     transition: 0.3s;
     background: white;
+    position: relative;
 
     &__todos {
-        width: 100%;
+      width: 100%;
       padding: 12px 0 0 2px;
-      display: flex;
+      display: inline-flex;
+      position: absolute; 
+      left: 0;
+      right: 0;
+      top: 36px;
+      bottom: 0;
+
       flex-direction: column;
       margin-right: 4px;
-
-      &::-webkit-scrollbar {
-        width: 6px;
-        background-color: PaleTurquoise;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: SteelBlue;
-        border-radius: 4px;
-      }
+      overflow-x: hidden;
+      overflow-y: auto;
+      max-height: min-content;
+      max-height: 100%;
 
     }
 
@@ -54,6 +52,10 @@
       display: flex;
       justify-content: space-between;
       border: none;
+
+      &--disabled {
+        pointer-events: none;
+      }
 
       &__text {
         overflow: hidden;
@@ -81,7 +83,6 @@
 
     &--disabled {
       background: rgba(0, 0, 0, 0.2);
-      // opacity: 0.1;
     }
 
     &--active {
@@ -89,10 +90,11 @@
     }
 
     &__day-week {
-
+      text-align: end;
     }
 
     &__day {
+      line-height: 32px;
       font-size: 32px;
     }
   }

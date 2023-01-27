@@ -16,7 +16,7 @@ const Header: React.FunctionComponent = () => {
         type="button"
         className="header__button header__button--add-todo"
         onClick={() => {
-          dispatch(addTodoActions.setOpenForm());
+          dispatch(addTodoActions.setOpenForm(true));
         }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -50,7 +50,7 @@ const Header: React.FunctionComponent = () => {
       </nav>
       <button
         type="button"
-        className="header__button header__button--today"
+        className="header__button header__button--today is-success"
         onClick={() => {
           dispatch(calendarActions.setMonth(new Date().getMonth()));
           dispatch(calendarActions.setYear(new Date().getFullYear()));
@@ -72,44 +72,46 @@ const Header: React.FunctionComponent = () => {
         </button>
         {openSelects && (
           <div className="header__selects">
-            <select
-              className="header__selects__item"
-              defaultValue={month}
-              onChange={(e) => {
-                console.log('set');
-                dispatch(calendarActions.setMonth(+e.target.value));
-              }}
-            >
-              {MonthReverse.map((item, index) => {
-                return (
-                  <option
-                    key={item}
-                    value={index}
-                  >
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
-            <select
-              className="header__selects__item"
-              defaultValue={year}
-              onChange={(e) => {
-                console.log('set');
-                dispatch(calendarActions.setYear(+e.target.value));
-              }}
-            >
-              {getYear().map((item) => {
-                return (
-                  <option
-                    key={item}
-                    value={item}
-                  >
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
+            <div className="select is-primary">
+              <select
+                defaultValue={month}
+                onChange={(e) => {
+                  console.log('set');
+                  dispatch(calendarActions.setMonth(+e.target.value));
+                }}
+              >
+                {MonthReverse.map((item, index) => {
+                  return (
+                    <option
+                      key={item}
+                      value={index}
+                    >
+                      {item}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div className="select is-primary">
+              <select
+                defaultValue={year}
+                onChange={(e) => {
+                  console.log('set');
+                  dispatch(calendarActions.setYear(+e.target.value));
+                }}
+              >
+                {getYear().map((item) => {
+                  return (
+                    <option
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
           </div>
         )}
       </div>

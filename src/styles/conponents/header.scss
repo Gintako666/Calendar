@@ -1,8 +1,7 @@
 .header {
   display: flex;
   gap: 24px;
-
-  padding: 32px 0;
+  padding: 32px;
   justify-content: space-between;
 
   &__nav {
@@ -28,7 +27,6 @@
     }
 
     &--add-todo {
-      // display: inline;
       width: 20px;
     }
 
@@ -61,43 +59,13 @@
     border-radius: 8px;
     right: 0;
     top: 0;
-    transform: translateX(-30%);
-    width: 200px;
+    transform: translate(-20%, -15%);
+    // width: 200px;
     display: flex;
+    gap: 20px;
     justify-content: space-between;
     background: LightSeaGreen;
     padding: 12px;
     position: absolute;
-
-    &__item {
-      width: 50%;
-      outline: none;
-      display: block;
-      padding: 4px;
-      background: Aquamarine;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-
-      &::after {
-        content: "";
-        display: block;
-        width: 12px;
-        height: 8px;
-        background: #000;
-        pointer-events: none;
-        box-sizing: border-box;
-      }
-
-      &::-webkit-scrollbar {
-        width: 6px;
-        background-color: PaleTurquoise;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: SteelBlue;
-        border-radius: 4px;
-      }
-    }
   }
 }

@@ -54,7 +54,7 @@ const NewIdeaItem: React.FunctionComponent = () => {
       <button
         type="button"
         className="new-idea-item__close"
-        onClick={() => dispatch(addTodoactions.setOpenForm())}
+        onClick={() => dispatch(addTodoactions.setOpenForm(false))}
       >
         ✖
       </button>
@@ -92,8 +92,9 @@ const NewIdeaItem: React.FunctionComponent = () => {
       <div className="new-idea-item__buttons">
         <button
           className={classNames(
-            'new-idea-item__button',
-            'new-idea-item__button--save',
+            'button',
+            'is-primary',
+            'is-large',
             { 'is-disabled': disabledButton },
           )}
           disabled={disabledButton}
@@ -126,21 +127,21 @@ const NewIdeaItem: React.FunctionComponent = () => {
               }]));
             }
 
-            dispatch(addTodoactions.setOpenForm());
+            dispatch(addTodoactions.setOpenForm(false));
             clearInputs();
           }}
         >
           Save
         </button>
-        {selectDate && (
+        {activeTodo && (
           <button
-            className="new-idea-item__button new-idea-item__button--delete"
+            className="button is-primary is-large is-danger"
             type="button"
             onClick={() => {
               if (activeTodo) {
                 dispatch(todosActions.removeTodo(activeTodo));
                 dispatch(addTodoactions.deleteSelectTodo());
-                dispatch(addTodoactions.setOpenForm());
+                dispatch(addTodoactions.setOpenForm(false));
               }
 
               clearInputs();

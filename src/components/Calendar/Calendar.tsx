@@ -81,16 +81,19 @@ const Calendar: React.FunctionComponent = () => {
 
                     <div
                       className="calendar__item__todos"
-                      style={{ overflowY: todosInThisDay.length > 3 ? 'scroll' : 'auto' }}
+                      // style={{ overflowY: todosInThisDay.length > 3 ? 'scroll' : 'auto' }}
                     >
                       {todosInThisDay.map(todo => {
                         return (
                           <button
                             type="button"
                             key={todo.refreshDate}
-                            className="calendar__item__todo-button"
+                            className={classNames(
+                              'calendar__item__todo-button',
+                              { 'calendar__item__todo-button--disabled': dateDisplay.getMonth() !== month },
+                            )}
                             onClick={() => {
-                              dispatch(addTodoActions.setOpenForm());
+                              dispatch(addTodoActions.setOpenForm(true));
                               dispatch(addTodoActions.setSelectTodo(todo));
                             }}
                           >

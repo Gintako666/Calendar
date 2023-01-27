@@ -1,11 +1,13 @@
 /* eslint-disable no-console */
 import React, { useEffect } from 'react';
 import './styles/App.scss';
+import 'bulma/css/bulma.min.css';
 import Calendar from './components/Calendar/Calendar';
 import Header from './components/Header/Header';
 import NewIdeaItem from './components/NewIdeaItem/NewIdeaItem';
 import { useLocalStorage } from './hooks/use-localStorage';
 import { useAppSelector } from './hooks/reduxHooks';
+import './index.css';
 // import { actions as todosActions } from './features/todos';
 
 const App: React.FC = () => {
@@ -21,11 +23,11 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <div className="container">
-        <Header />
-        <Calendar />
-        {isOpen && <NewIdeaItem />}
-      </div>
+      {/* <div className="container"> */}
+      <Header />
+      <Calendar />
+      {isOpen && <NewIdeaItem />}
+      {/* </div> */}
     </div>
   );
 };
