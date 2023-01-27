@@ -19,14 +19,4 @@ export const Month = {
   December: 11,
 };
 
-export const getYear = () => {
-  const result: number[] = [];
-
-  for (let i = 1990; i < 2030; i += 1) {
-    result.push(i);
-  }
-
-  return result;
-};
-
 export const MonthReverse = Object.keys(Month);

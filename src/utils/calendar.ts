@@ -1,8 +1,7 @@
 import {
   DAYS_IN_MONTH, DAYS_IN_WEEK, Month, WEEK_DAYS_FROM_MONDAY,
-} from '../utils/consts';
+} from './consts';
 
-/* eslint-disable no-console */
 export function areEqual(a: Date, b: Date | null) {
   if (!a || !b) {
     return false;
@@ -69,10 +68,8 @@ export function getNextMonthDataWeek(year: number, month: number): (Date | undef
   return (getMonthData(year, month + 1)[0]);
 }
 
-export function getMonthDataRender(year: number, month: number): (Date | undefined)[][] {
+export function getMonthDataRender(year: number, month: number): (Date)[][] {
   let result: any[] = [];
-
-  console.log(month);
 
   result = getMonthData(year, month);
   const prevMonth = getPrevMonthDataWeek(year, month);
@@ -100,3 +97,13 @@ export function getMonthDataRender(year: number, month: number): (Date | undefin
 
   return result;
 }
+
+export const getYears = () => {
+  const result: number[] = [];
+
+  for (let i = 1990; i < 2030; i += 1) {
+    result.push(i);
+  }
+
+  return result;
+};

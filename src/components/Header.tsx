@@ -1,9 +1,9 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
-import { actions as addTodoActions } from '../../features/addTodo';
-import { actions as calendarActions } from '../../features/calendar';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import { getYear, MonthReverse } from '../../utils/consts';
+import { actions as eventTodoActions } from '../features/eventTodo';
+import { actions as calendarActions } from '../features/calendar';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { MonthReverse } from '../utils/consts';
+import { getYears } from '../utils/calendar';
 
 const Header: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ const Header: React.FunctionComponent = () => {
         type="button"
         className="header__button header__button--add-todo"
         onClick={() => {
-          dispatch(addTodoActions.setOpenForm(true));
+          dispatch(eventTodoActions.setOpenForm(true));
         }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -76,7 +76,6 @@ const Header: React.FunctionComponent = () => {
               <select
                 defaultValue={month}
                 onChange={(e) => {
-                  console.log('set');
                   dispatch(calendarActions.setMonth(+e.target.value));
                 }}
               >
@@ -96,11 +95,10 @@ const Header: React.FunctionComponent = () => {
               <select
                 defaultValue={year}
                 onChange={(e) => {
-                  console.log('set');
                   dispatch(calendarActions.setYear(+e.target.value));
                 }}
               >
-                {getYear().map((item) => {
+                {getYears().map((item) => {
                   return (
                     <option
                       key={item}

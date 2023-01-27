@@ -1,16 +1,12 @@
-/* eslint-disable operator-assignment */
-/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: {
   date: Date,
-  monthData: (Date | undefined)[][]
   year: number
   month: number
 } = {
   date: new Date(),
-  monthData: [],
   year: new Date().getFullYear(),
   month: new Date().getMonth(),
 };

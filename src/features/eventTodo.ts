@@ -1,5 +1,3 @@
-/* eslint-disable operator-assignment */
-/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Todo } from '../types/todo';
@@ -14,8 +12,8 @@ const initialState: {
   activeTodo: null,
 };
 
-const addTodoSlice = createSlice({
-  name: 'addTodo',
+const eventTodoSlice = createSlice({
+  name: 'EventTodo',
   initialState,
   reducers: {
     setSelectDate: (value, action: PayloadAction<string | null>) => {
@@ -33,6 +31,6 @@ const addTodoSlice = createSlice({
   },
 });
 
-export const { actions } = addTodoSlice;
+export const { actions } = eventTodoSlice;
 
-export default addTodoSlice.reducer;
+export default eventTodoSlice.reducer;

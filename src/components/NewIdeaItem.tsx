@@ -1,13 +1,12 @@
-/* eslint-disable no-console */
 import classNames from 'classnames';
 import React, { useEffect, useState, useCallback } from 'react';
-import { actions as addTodoactions } from '../../features/addTodo';
-import { actions as todosActions } from '../../features/todos';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { actions as eventTodoActions } from '../features/eventTodo';
+import { actions as todosActions } from '../features/todos';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 
 const NewIdeaItem: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
-  const { activeTodo, selectDate } = useAppSelector(state => state.addTodo);
+  const { activeTodo, selectDate } = useAppSelector(state => state.eventTodo);
   const [title, setTitle] = useState('');
   const [description, setdescription] = useState('');
   const [date, setdate] = useState('');
@@ -22,7 +21,7 @@ const NewIdeaItem: React.FunctionComponent = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(addTodoactions.deleteSelectTodo());
+      dispatch(eventTodoActions.deleteSelectTodo());
     };
   }, []);
 
@@ -49,12 +48,41 @@ const NewIdeaItem: React.FunctionComponent = () => {
     }
   }, [title, description, date, time]);
 
+  const handleAddNewTodo = useCallback(() => {
+    const refreshDate = `${new Date().toLocaleDateString('en-GB')} ${new Date().toTimeString().slice(0, 8)}`;
+
+    const newTodo = {
+
+      title,
+      description,
+      date,
+      time,
+      refreshDate,
+    };
+
+    if (activeTodo) {
+      dispatch(todosActions.editTodo({
+        id: activeTodo.id,
+        ...newTodo,
+      }));
+      dispatch(eventTodoActions.deleteSelectTodo());
+    } else {
+      dispatch(todosActions.setTodos([{
+        id: Math.random() * 100000,
+        ...newTodo,
+      }]));
+    }
+
+    dispatch(eventTodoActions.setOpenForm(false));
+    clearInputs();
+  }, [title, description, date, time, activeTodo]);
+
   return (
     <div className="new-idea-item">
       <button
         type="button"
         className="new-idea-item__close"
-        onClick={() => dispatch(addTodoactions.setOpenForm(false))}
+        onClick={() => dispatch(eventTodoActions.setOpenForm(false))}
       >
         ✖
       </button>
@@ -99,37 +127,7 @@ const NewIdeaItem: React.FunctionComponent = () => {
           )}
           disabled={disabledButton}
           type="button"
-          onClick={() => {
-            const refreshDate = `${new Date().toLocaleDateString('en-GB')} ${new Date().toTimeString().slice(0, 8)}`;
-
-            const newTodo = {
-
-              title,
-              description,
-              date,
-              time,
-              refreshDate,
-            };
-
-            console.log(date);
-            // 2023-01-23
-
-            if (activeTodo) {
-              dispatch(todosActions.editTodo({
-                id: activeTodo.id,
-                ...newTodo,
-              }));
-              dispatch(addTodoactions.deleteSelectTodo());
-            } else {
-              dispatch(todosActions.setTodos([{
-                id: Math.random() * 100000,
-                ...newTodo,
-              }]));
-            }
-
-            dispatch(addTodoactions.setOpenForm(false));
-            clearInputs();
-          }}
+          onClick={handleAddNewTodo}
         >
           Save
         </button>
@@ -140,8 +138,8 @@ const NewIdeaItem: React.FunctionComponent = () => {
             onClick={() => {
               if (activeTodo) {
                 dispatch(todosActions.removeTodo(activeTodo));
-                dispatch(addTodoactions.deleteSelectTodo());
-                dispatch(addTodoactions.setOpenForm(false));
+                dispatch(eventTodoActions.deleteSelectTodo());
+                dispatch(eventTodoActions.setOpenForm(false));
               }
 
               clearInputs();
