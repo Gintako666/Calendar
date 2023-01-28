@@ -21,21 +21,25 @@ export const Week: React.FunctionComponent<WeekProps> = ({ dateDisplay, indexDat
     return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   }, []);
 
+  const normalizeDateString = useCallback((date: Date) => {
+    return date.toLocaleDateString('en-GB').split('/').reverse().join('-');
+  }, []);
+
   const handleDayClick = useCallback((dateSelect: Date | null) => {
     if (dateSelect) {
-      dispatch(eventTodoActions.setSelectDate(dateSelect.toLocaleDateString('en-GB').split('/').reverse().join('-')));
+      dispatch(eventTodoActions.setSelectDate(normalizeDateString(dateSelect)));
     } else {
       dispatch(eventTodoActions.setSelectDate(dateSelect));
     }
   }, []);
 
   const getIsSelectDate = useCallback((date) => {
-    return date.toLocaleDateString('en-GB').split('/').reverse().join('-') === selectDate;
+    return normalizeDateString(date) === selectDate;
   }, [selectDate]);
 
-  const getTodosInThisDay = useCallback((date: Date | undefined) => {
+  const getTodosInThisDay = useCallback((date: Date) => {
     return todos.filter(item => (
-      item.date === date?.toLocaleDateString('en-GB').split('/').reverse().join('-')
+      item.date === normalizeDateString(date)
     )).sort((a: Todo, b: Todo) => a.time.localeCompare(b.time));
   }, []);
 
