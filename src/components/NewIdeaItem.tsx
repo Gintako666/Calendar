@@ -8,15 +8,15 @@ const NewIdeaItem: React.FC = () => {
   const dispatch = useAppDispatch();
   const { activeTodo, selectDate } = useAppSelector(state => state.eventTodo);
   const [title, setTitle] = useState('');
-  const [description, setdescription] = useState('');
-  const [date, setdate] = useState('');
-  const [time, settime] = useState('');
-  const [disabledButton, setdisabledButton] = useState(true);
+  const [description, setDescription] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [disabledButton, setDisabledButton] = useState(true);
 
   const clearInputs = useCallback(() => {
     setTitle('');
-    setdescription('');
-    settime('');
+    setDescription('');
+    setTime('');
   }, []);
 
   useEffect(() => {
@@ -28,23 +28,23 @@ const NewIdeaItem: React.FC = () => {
   useEffect(() => {
     if (activeTodo) {
       setTitle(activeTodo.title);
-      setdescription(activeTodo.description);
-      setdate(activeTodo.date);
-      settime(activeTodo.time);
+      setDescription(activeTodo.description);
+      setDate(activeTodo.date);
+      setTime(activeTodo.time);
     }
   }, [activeTodo]);
 
   useEffect(() => {
     if (selectDate) {
-      setdate(selectDate);
+      setDate(selectDate);
     }
   }, [selectDate]);
 
   useEffect(() => {
     if (title && description && date && time) {
-      setdisabledButton(false);
+      setDisabledButton(false);
     } else {
-      setdisabledButton(true);
+      setDisabledButton(true);
     }
   }, [title, description, date, time]);
 
@@ -101,20 +101,20 @@ const NewIdeaItem: React.FC = () => {
         placeholder="Descriptions"
         className="new-idea-item__input new-idea-item__input--text"
         value={description}
-        onChange={(e) => setdescription(e.target.value)}
+        onChange={(e) => setDescription(e.target.value)}
       />
       <div className="new-idea-item__set-time">
         <input
           type="date"
           className="new-idea-item__input new-idea-item__input--date"
           value={date}
-          onChange={(e) => setdate(e.target.value)}
+          onChange={(e) => setDate(e.target.value)}
         />
         <input
           type="time"
           className="new-idea-item__input new-idea-item__input--time"
           value={time}
-          onChange={(e) => settime(e.target.value)}
+          onChange={(e) => setTime(e.target.value)}
         />
       </div>
       <div className="new-idea-item__buttons">

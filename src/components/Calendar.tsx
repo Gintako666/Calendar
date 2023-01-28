@@ -6,10 +6,10 @@ import { Week } from './Week';
 export const Calendar: React.FunctionComponent = () => {
   const { year, month } = useAppSelector(state => state.calendar);
 
-  const [monthData, setmonthData] = useState(getMonthDataRender(year, month));
+  const [monthData, setMonthData] = useState(getMonthDataRender(year, month));
 
   useEffect(() => {
-    setmonthData(getMonthDataRender(year, month));
+    setMonthData(getMonthDataRender(year, month));
   }, [month, year]);
 
   return (
