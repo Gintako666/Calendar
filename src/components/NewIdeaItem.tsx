@@ -4,7 +4,7 @@ import { actions as eventTodoActions } from '../features/eventTodo';
 import { actions as todosActions } from '../features/todos';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 
-const NewIdeaItem: React.FunctionComponent = () => {
+const NewIdeaItem: React.FC = () => {
   const dispatch = useAppDispatch();
   const { activeTodo, selectDate } = useAppSelector(state => state.eventTodo);
   const [title, setTitle] = useState('');

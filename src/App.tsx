@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect } from 'react';
 import './styles/App.scss';
 import 'bulma/css/bulma.min.css';
@@ -14,7 +13,6 @@ const App: React.FC = () => {
   const [, setTodos] = useLocalStorage('todos', []);
 
   useEffect(() => {
-    console.log('set');
     setTodos(todos);
   }, [todos]);
 
